@@ -1,0 +1,56 @@
+{%extends 'home.html'%} {%block content %}
+<h1>Hello, {{user.first_name}} Edit Your Trip</h1>
+<form action="/update_trip/{{trip.id}}" method="POST" class="form">
+  {% csrf_token %}
+  <h1 class="text-center">Edit a Trip</h1>
+  {%if messages%} {%for msg in messages%}
+  <p class="text-danger">{{msg}}</p>
+  {%endfor%} {%endif%}
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Destination</label>
+    <input
+      type="text"
+      class="form-control"
+      name="destination"
+      placeholder="Enter Your Destination"
+      value="{{trip.destination}}"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">start date</label>
+    <input
+      type="date"
+      class="form-control"
+      name="start_date"
+      placeholder="Enter Your Start Date"
+      value="{{trip.start_date|date:'Y-m-d'}}"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">End Date</label>
+    <input
+      type="date"
+      class="form-control"
+      name="end_date"
+      placeholder="Enter Your End Date"
+      value="{{trip.end_date|date:'Y-m-d'}}"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Plan</label>
+    <input
+      type="text"
+      class="form-control"
+      name="plan"
+      placeholder="Enter Your Plan"
+      value="{{trip.plan}}"
+    />
+  </div>
+  <button type="submit" class="btn btn-outline-success btn-block mt-3">
+    Edit New Trip
+  </button>
+  <a href="/dashboard" class="btn btn-outline-primary btn-block mt-3">
+    Cansel
+  </a>
+</form>
+{%endblock%}

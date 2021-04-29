@@ -1,0 +1,15 @@
+{%extends 'home.html' %} {%block content%}
+<h1>Hello {{user.first_name}}, Read about this trip!</h1>
+<h4>{{trip.destension}}</h4>
+<div class="card p-3">
+  <h4>Start date: {{trip.start_date}}</h4>
+  <h4>End date: {{trip.start_date}}</h4>
+  <h4>Created On: {{trip.created_at}}</h4>
+  <h4>Last Updated On: {{trip.updated_at}}</h4>
+  <h4>Created By: {{trip.created_by.first_name}}</h4>
+</div>
+<div class="card p-3 mt-3">
+  <h3>People Who've Join the Trip:</h3>
+  {% for t in trip.users_who_join_trip.all%} {{t.first_name}} {%endfor%}
+</div>
+{%endblock%}

@@ -1,0 +1,52 @@
+{%extends 'home.html'%} {%block content %}
+<h1>Hello, {{user.first_name}} Create a Trip</h1>
+<form action="/new_trip_form" method="POST" class="form">
+  {% csrf_token %}
+  <h1 class="text-center">Create a Trip</h1>
+  {%if messages%} {%for msg in messages%}
+  <p class="text-danger">{{msg}}</p>
+  {%endfor%} {%endif%}
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Destination</label>
+    <input
+      type="text"
+      class="form-control"
+      name="destination"
+      placeholder="Enter Your Destination"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">start date</label>
+    <input
+      type="date"
+      class="form-control"
+      name="start_date"
+      placeholder="Enter Your Start Date"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">End Date</label>
+    <input
+      type="date"
+      class="form-control"
+      name="end_date"
+      placeholder="Enter Your End Date"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Plan</label>
+    <input
+      type="text"
+      class="form-control"
+      name="plan"
+      placeholder="Enter Your Plan"
+    />
+  </div>
+  <button type="submit" class="btn btn-outline-success btn-block mt-3">
+    Create New Trip
+  </button>
+  <a href="/dashboard" class="btn btn-outline-primary btn-block mt-3">
+    Cansel
+  </a>
+</form>
+{%endblock%}

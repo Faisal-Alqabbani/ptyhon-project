@@ -1,0 +1,62 @@
+{%extends 'home.html'%} {%block content%}
+<h3>Your Trips:</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Destination</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Plan</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for trip in trips %} {%if user.id == trip.created_by.id%}
+    <tr>
+      <td><a href="/trips/{{trip.id}}">{{trip.destination}}</a></td>
+      <td>{{trip.start_date}}</td>
+      <td>{{trip.end_date}}</td>
+      <td>{{trip.plan}}</td>
+      <td>
+        <a href="/remove/{{trip.id}}">Remove</a>|
+        <a href="/trips/edit/{{trip.id}}">Edit</a>
+      </td>
+    </tr>
+    {%endif%} {%endfor %} {%for us in user.book_trip.all%}
+    <tr>
+      <td><a href="/trips/{{us.id}}">{{us.destination}}</a></td>
+      <td>{{us.start_date}}</td>
+      <td>{{us.end_date}}</td>
+      <td>{{us.plan}}</td>
+      <td><a href="/cancel/{{us.id}}">Cancel</a></td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+<hr class="my-4" />
+<h3>Other People Trips</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Destination</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Plan</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for trip in trips %} {%if user.id != trip.created_by.id%} {%if user not in trip.users_who_join_trip.all%}
+    <tr>
+      <td><a href="/trips/{{trip.id}}">{{trip.destination}}</a></td>
+      <td>{{trip.start_date}}</td>
+      <td>{{trip.end_date}}</td>
+      <td>{{trip.plan}}</td>
+      <td>
+        <a href="/join/{{trip.id}}">Join</a>
+      </td>
+    </tr>
+    {%endif%} {%endif%} {%endfor%}
+  </tbody>
+</table>
+{%endblock%}

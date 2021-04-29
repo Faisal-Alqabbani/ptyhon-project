@@ -1,0 +1,35 @@
+{%extends 'home.html' %} {%block content%}
+
+<form action="/login_form" method="POST" class="form">
+  {% csrf_token %}
+  <h1 class="text-center">Login</h1>
+  {%if messages%} {%for msg in messages%}
+  <p class="text-danger">{{msg}}</p>
+  {%endfor%} {%endif%}
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      placeholder="Enter your email"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      placeholder="Enter your password"
+    />
+  </div>
+  <button type="submit" class="btn btn-outline-primary btn-block mt-3">
+    Login
+  </button>
+  <br />
+  you don't have an account?
+  <a href="/register">Register</a>
+</form>
+
+{%endblock%}
